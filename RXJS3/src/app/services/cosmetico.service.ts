@@ -1,9 +1,31 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Cosmetico, Cosmeticos, CosmeticosInterface} from '../common/cosmeticos-interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CosmeticoService {
+  private readonly http: HttpClient = inject(HttpClient);
+  urlBase = 'https://api-cosmeticos.vercel.app/api/v2/cosmeticos/'
 
   constructor() { }
+
+  getCosmeticos(page: number, size: number): Observable<CosmeticosInterface>{
+    const url = 'https://api-cosmeticos.vercel.app/api/v2/cosmeticos/paged?page='
+    return this.http.get<CosmeticosInterface>(url+page+'&limit='+size);
+  }
+  getCosmetico(id: string): Observable<CosmeticosInterface>{
+    return this.http.get<CosmeticosInterface>(this.urlBase+'detail/'+id);
+  }
+  addCosmetico(cosmetico: Cosmetico): Observable<CosmeticosInterface>{
+    return this.http.post<CosmeticosInterface>(this.urlBase+'addOne/',cosmetico);
+  }
+  putCosmetico(id: string, cosmetico: Cosmetico): Observable<any>{
+    return this.http.put<any>(this.urlBase+'updateOne/'+id, cosmetico);
+  }
+  deleteCosmetico(id: string): Observable<any>{
+    return this.http.delete<any>(this.urlBase+'deleteOne/'+id);
+  }
 }
