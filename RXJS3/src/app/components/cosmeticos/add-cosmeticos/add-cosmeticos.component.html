@@ -1,1 +1,47 @@
-<p>add-cosmeticos works!</p>
+<div>
+  <div class="m-4 text-center d-flex justify-content-center text-capitalize">
+
+    <form [formGroup]="formCosmetico" (ngSubmit)="onSubmit()">
+      <div class="form-floating mb-3">
+        <div>
+          <label for="name">Nombre: </label>
+          <input formControlName="name"
+                 type="text" required class="form-control"
+                 id="name"
+                 placeholder="Nombre...">
+        </div>
+        <div>
+          <label for="image">URL Imagen</label>
+          <input formControlName="image"
+                 type="text" required class="form-control"
+                 id="image"
+                 placeholder="URL Imagen">
+        </div>
+        <div>
+          <label for="type">Tipo: </label>
+          <input formControlName="type"
+                 type="text" class="form-control"
+                 id="type"
+                 placeholder="Type...">
+        </div>
+        <div>
+          <label for="brand">Brand: </label>
+          <input formControlName="brand"
+                 type="text" class="form-control"
+                 id="brand"
+                 placeholder="Brand...">
+        </div>
+        <div>
+          <label for="price">Precio:</label>
+          <input formControlName="price"
+                 type="number" class="form-control"
+                 id="price"
+                 placeholder="Precio:">
+        </div>
+        <div class="m-3">
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
