@@ -19,8 +19,8 @@ export class JugueteService {
   getJuguete(id: string): Observable<Juguete>{
     return this.http.get<Juguete>(this.urlBase+'juguete/'+id);
   }
-  addJuguete(juguete: Juguete): Observable<JugueteInterface>{
-    return this.http.post<JugueteInterface>(this.urlBase+'juguetes/', juguete);
+  addJuguete(juguete: Juguete): Observable<any>{
+    return this.http.post<any>(this.urlBase+'juguetes/', juguete);
   }
   putJuguete(id:string, juguete: Juguete): Observable<any>{
     return this.http.put<any>(this.urlBase+'update/'+id, juguete);

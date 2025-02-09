@@ -1,8 +1,12 @@
 @defer(when juguetes) {
-  @if(!detail){
-  <div class="row row-cols-4 mx-auto justify-content-center">
+  @if(toastShow){
+    <ngb-toast class="toast-container position-fixed top-0 end-50
+{{toast.color}}">{{toast.message}}</ngb-toast>
+  }
+  <div class="row mx-auto justify-content-center">
     @for(juguete of juguetes; track juguete._id){
-    <div class="card my-3 text-center text-capitalize m-2">
+      <div class="col-3">
+    <div class="card shadow my-3 text-center text-capitalize m-2">
         <img class="card-img-top" src="{{juguete.imagen}}" alt="{{juguete.nombre}}" width="200px" height="200px">
       <div class="card-header m-2 border-0">
         <div class="card-title">
@@ -20,20 +24,12 @@
         <div class="btn btn-danger text-dark">
           Delete
         </div>
-        <!--<p class="badge bg-primary my-auto">Edad mínima: {{juguete.edadMinima}}</p>
-        <p class="badge bg-primary my-auto">{{juguete.precio | currency: 'EUR'}}</p> -->
       </div>
     </div>
-    }
-  </div>
-  } @else {
-    <div class="row my-4 mx-auto">
-      <div class="card">
-          <img class="card-img-top" src="{{juguete.imagen}}" alt="{{juguete.nombre}}">
       </div>
 
-    </div>
-  }
+    }
+  </div>
 } @placeholder (minimum 1s){
   <h1 class="text-center text-primary">Cargando juguetes...</h1>
 }

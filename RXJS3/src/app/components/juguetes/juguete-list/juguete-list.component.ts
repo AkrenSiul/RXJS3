@@ -1,15 +1,16 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {JugueteService} from '../../../services/juguete.service';
-import {FormBuilder} from '@angular/forms';
 import {Juguete} from '../../../common/juguete-interface';
 import {CurrencyPipe} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import {NgbToast} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-juguete-list',
   imports: [
     CurrencyPipe,
-    RouterLink
+    RouterLink,
+    NgbToast
   ],
   templateUrl: './juguete-list.component.html',
   styleUrl: './juguete-list.component.css'
@@ -17,11 +18,16 @@ import {RouterLink} from '@angular/router';
 export class JugueteListComponent implements OnInit {
   @Input('id')id!: string;
   private readonly jugueteService: JugueteService = inject(JugueteService);
-  private readonly formBuilder: FormBuilder = inject(FormBuilder);
   detail = false;
   currentPage = 1;
   juguetes: Juguete[] = [];
   juguete!: Juguete;
+  toastShow = false;
+  toast = {
+    message: '',
+    color: 'bg-success'
+  }
+
 
   ngOnInit() {
     if(!this.id) {
@@ -40,7 +46,12 @@ export class JugueteListComponent implements OnInit {
           this.juguetes = value.juguetes.juguetes;
         },
         complete: () => {
-          console.log('Complete');
+          this.toastShow = true;
+          this.showToast('Juguetes traídos correctamente', 'bg-success');
+          setTimeout(() =>
+          {
+            this.toastShow = false;
+          },2500)
         },
         error: err => {
           console.log(err.message);
@@ -65,5 +76,10 @@ export class JugueteListComponent implements OnInit {
       }
     )
 
+  }
+
+  private showToast(message: string, color: string) {
+    this.toast.message = message;
+    this.toast.color = color;
   }
 }
