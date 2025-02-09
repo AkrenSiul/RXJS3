@@ -1,15 +1,14 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import {JugueteService} from '../../../services/juguete.service';
-import {FormBuilder} from '@angular/forms';
-import {Juguete} from '../../../common/juguete-interface';
-import {CurrencyPipe} from '@angular/common';
+import {Juguete, JugueteInterface} from '../../../common/juguete-interface';
 import {RouterLink} from '@angular/router';
+import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-juguete-list',
   imports: [
-    CurrencyPipe,
-    RouterLink
+    RouterLink,
+    NgbPagination
   ],
   templateUrl: './juguete-list.component.html',
   styleUrl: './juguete-list.component.css'
@@ -17,9 +16,9 @@ import {RouterLink} from '@angular/router';
 export class JugueteListComponent implements OnInit {
   @Input('id')id!: string;
   private readonly jugueteService: JugueteService = inject(JugueteService);
-  private readonly formBuilder: FormBuilder = inject(FormBuilder);
   detail = false;
   currentPage = 1;
+  apiData!: JugueteInterface;
   juguetes: Juguete[] = [];
   juguete!: Juguete;
 
@@ -38,6 +37,7 @@ export class JugueteListComponent implements OnInit {
       {
         next: value => {
           this.juguetes = value.juguetes.juguetes;
+          this.apiData = value;
         },
         complete: () => {
           console.log('Complete');
@@ -65,5 +65,28 @@ export class JugueteListComponent implements OnInit {
       }
     )
 
+  }
+
+  onDelete(juguete: Juguete) {
+    if(confirm('¿Deseas eliminar el juguete?')){
+      this.jugueteService.deleteJuguete(juguete._id).subscribe(
+        {
+          next: value => {
+            this.juguete = value;
+          },
+          complete: () => {
+            console.log('Complete');
+          },
+          error: err => {
+            console.log(err.message);
+          }
+        }
+      )
+    }
+
+  }
+
+  loadData() {
+    this.currentPage++;
   }
 }

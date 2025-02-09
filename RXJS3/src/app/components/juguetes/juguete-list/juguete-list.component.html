@@ -1,39 +1,64 @@
-@defer(when juguetes) {
-  @if(!detail){
-  <div class="row row-cols-4 mx-auto justify-content-center">
-    @for(juguete of juguetes; track juguete._id){
-    <div class="card my-3 text-center text-capitalize m-2">
-        <img class="card-img-top" src="{{juguete.imagen}}" alt="{{juguete.nombre}}" width="200px" height="200px">
-      <div class="card-header m-2 border-0">
-        <div class="card-title">
-          <h5>{{juguete.nombre}}</h5>
+@defer(when juguetes){
+  <div class="row my-2">
+    <div class="col-3">
+      <ngb-pagination
+        [collectionSize]="apiData.juguetes.info.total"
+        [(page)]="currentPage"
+        [pageSize]="12"
+        [ellipses]="true"
+        [maxSize]="3"
+        [rotate]="true"
+        (pageChange)="loadData()"></ngb-pagination>
+    </div>
+    <div class="col-3">
+      <div class="d-flex align-content-center">
+        <div class="input-group filter-search">
+    <span class="input-group-text" id="input-search">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+      </svg>
+    </span>
+          <input type="text" class="form-control input-search" placeholder="Search..." tabindex="-1" aria-label="Search..." aria-describedby="input-search">
         </div>
-
-      </div>
-      <div class="card-body">
-          <h5 class="text-primary">{{juguete.precio | currency: 'EUR'}}</h5>
-      </div>
-      <div class="card-footer d-flex justify-content-between ">
-        <div class="btn btn-primary text-dark" [routerLink]="juguete._id">
-          Detalle
-        </div>
-        <div class="btn btn-danger text-dark">
-          Delete
-        </div>
-        <!--<p class="badge bg-primary my-auto">Edad mínima: {{juguete.edadMinima}}</p>
-        <p class="badge bg-primary my-auto">{{juguete.precio | currency: 'EUR'}}</p> -->
       </div>
     </div>
-    }
+    </div>
+
+
+
+  <div class="p-4 text-center">
+      <div class="row">
+        @for(juguete of juguetes; track $index){
+        <div class="col-3">
+          <div class="card m-3 border rounded-top-5 bg-primary">
+            <div class="text-capitalize card-header" routerLink="{{juguete._id}}">
+                <h1>Nombre: {{juguete.nombre}}</h1>
+            </div>
+            <div routerLink="{{juguete._id}}">
+              <img class="card-img-top"  src="{{juguete.imagen}}" alt="{{juguete.nombre}}"
+               height="250px">
+            </div>
+            <div class="card-footer">
+              <h3>Precio: {{juguete.precio}}</h3>
+              <h4>Edad mínima: {{juguete.edadMinima}}</h4>
+            </div>
+            <div>
+              <button class="m-3" (click)="onDelete(juguete)">
+                <h2>Eliminar</h2>
+              </button>
+
+              <button class="m-4" routerLink="update/{{juguete._id}}">
+                <h2>Editar</h2>
+              </button>
+            </div>
+          </div>
+        </div>
+        }
+        </div>
   </div>
-  } @else {
-    <div class="row my-4 mx-auto">
-      <div class="card">
-          <img class="card-img-top" src="{{juguete.imagen}}" alt="{{juguete.nombre}}">
-      </div>
-
-    </div>
-  }
+  <br>
 } @placeholder (minimum 1s){
-  <h1 class="text-center text-primary">Cargando juguetes...</h1>
+  <div class="row text-center">
+    <h2 class="text-primary">Cargando juguetes...</h2>
+  </div>
 }
