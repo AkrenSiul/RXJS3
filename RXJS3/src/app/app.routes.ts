@@ -15,6 +15,10 @@ export const routes: Routes = [
     component: JugueteListComponent
   },
   {
+    path: 'juguetes-list/:id',
+    component: JugueteListComponent
+  },
+  {
     path: 'add-juguete',
     component: AddJuguetesComponent
   },

@@ -16,8 +16,8 @@ export class JugueteService {
     const url = 'https://api-juguetes.vercel.app/api/v2/juguete/juguetes?page=';
     return this.http.get<JugueteInterface>(url+page);
   }
-  getJuguete(id: string): Observable<JugueteInterface>{
-    return this.http.get<JugueteInterface>(this.urlBase+'juguete/'+id);
+  getJuguete(id: string): Observable<Juguete>{
+    return this.http.get<Juguete>(this.urlBase+'juguete/'+id);
   }
   addJuguete(juguete: Juguete): Observable<JugueteInterface>{
     return this.http.post<JugueteInterface>(this.urlBase+'juguetes/', juguete);
