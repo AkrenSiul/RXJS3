@@ -14,12 +14,16 @@ export class SearchService {
   private palabra: Subject<string> = new Subject<string>();
   private toySearch$: Observable<Juguete[]> = this.palabra.pipe(
     switchMap(word => {
-      return this.http.get<Juguete[]>(this.urlSearch+word)
+      return this.http.get<Juguete[]>(
+        this.urlSearch+word
+      )
     })
   )
   private cosmeticSearch$: Observable<Cosmetico[]> = this.palabra.pipe(
     switchMap(word => {
-      return this.http.get<Cosmetico[]>(this.urlSearchCosm+word);
+      return this.http.get<Cosmetico[]>(
+        this.urlSearchCosm+word
+      );
     })
   )
 
