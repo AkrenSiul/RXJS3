@@ -3,6 +3,7 @@ import {RouterLink} from '@angular/router';
 import {CurrencyPipe} from '@angular/common';
 import {CosmeticoService} from '../../../services/cosmetico.service';
 import {Cosmetico} from '../../../common/cosmeticos-interface';
+import {SearchService} from '../../../services/search.service';
 
 @Component({
   selector: 'app-cosmetico-list',
@@ -16,12 +17,14 @@ import {Cosmetico} from '../../../common/cosmeticos-interface';
 export class CosmeticoListComponent {
   @Input('id')id!: string;
   private readonly cosmeticoService: CosmeticoService = inject(CosmeticoService);
+  private readonly searchService: SearchService = inject(SearchService);
   cosmeticos: Cosmetico[] = [];
   currentPage = 1;
   sizePage = 20;
 
   constructor(){
     this.getCosmeticos();
+    this.searchCosmeticos();
   }
 
   private getCosmeticos() {
@@ -60,4 +63,23 @@ export class CosmeticoListComponent {
     }
   }
 
+    search(event: any) {
+    this.searchService.search(event.target.value);
+    }
+
+  private searchCosmeticos() {
+    this.searchService.startCosmetic().subscribe(
+      {
+        next: value => {
+          this.cosmeticos = value;
+        },
+        complete: () => {
+          console.log('COmpletado')
+        },
+        error: err => {
+          console.log(err.message);
+        }
+      }
+    )
+  }
 }

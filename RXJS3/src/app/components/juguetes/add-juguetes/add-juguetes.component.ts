@@ -18,6 +18,7 @@ export class AddJuguetesComponent implements OnInit{
   private readonly router: Router = inject(Router);
   private readonly formBuilder: FormBuilder = inject(FormBuilder);
   juguete!: Juguete;
+  edit = false;
 
   formJuguete: FormGroup = this.formBuilder.group(
     {
@@ -31,7 +32,11 @@ export class AddJuguetesComponent implements OnInit{
 
   ngOnInit() {
     if(this.id){
+      this.edit = true;
       this.getJuguete(this.id)
+    }else{
+      this.edit = false;
+
     }
   }
 

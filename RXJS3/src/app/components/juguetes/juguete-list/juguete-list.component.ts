@@ -92,7 +92,20 @@ export class JugueteListComponent implements OnInit {
   }
 
   loadData() {
-    this.currentPage++;
+    return this.jugueteService.getJuguetes(this.currentPage).subscribe(
+      {
+        next: value => {
+          this.juguetes = value.juguetes.juguetes;
+          this.apiData = value;
+        },
+        complete: () => {
+          console.log('Complete');
+        },
+        error: err => {
+          console.log(err.message);
+        }
+      }
+    )
   }
 
   private loadSearch() {
