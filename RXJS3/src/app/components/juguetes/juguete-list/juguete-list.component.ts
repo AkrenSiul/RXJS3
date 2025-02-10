@@ -3,12 +3,15 @@ import {JugueteService} from '../../../services/juguete.service';
 import {Juguete, JugueteInterface} from '../../../common/juguete-interface';
 import {RouterLink} from '@angular/router';
 import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
+import {SearchService} from '../../../services/search.service';
+import {CurrencyPipe} from '@angular/common';
 
 @Component({
   selector: 'app-juguete-list',
   imports: [
     RouterLink,
-    NgbPagination
+    NgbPagination,
+    CurrencyPipe
   ],
   templateUrl: './juguete-list.component.html',
   styleUrl: './juguete-list.component.css'
@@ -16,6 +19,7 @@ import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 export class JugueteListComponent implements OnInit {
   @Input('id')id!: string;
   private readonly jugueteService: JugueteService = inject(JugueteService);
+  private readonly searchService: SearchService = inject(SearchService);
   detail = false;
   currentPage = 1;
   apiData!: JugueteInterface;
@@ -25,6 +29,7 @@ export class JugueteListComponent implements OnInit {
   ngOnInit() {
     if(!this.id) {
       this.getJuguetes(this.currentPage);
+      this.loadSearch();
     }else {
       this.detail = true;
       this.getJuguete(this.id)
@@ -88,5 +93,25 @@ export class JugueteListComponent implements OnInit {
 
   loadData() {
     this.currentPage++;
+  }
+
+  private loadSearch() {
+    return this.searchService.startToy().subscribe(
+      {
+        next: value => {
+          this.juguetes = value;
+        },
+        complete: () => {
+          console.log('Complete')
+        },
+        error: err => {
+          console.log(err.message);
+        }
+      }
+    )
+  }
+
+  search(event: any) {
+    this.searchService.search(event.target.value);
   }
 }

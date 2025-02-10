@@ -1,4 +1,5 @@
 @defer(when juguetes){
+  @if(!id){
   <div class="row my-2">
     <div class="col-3">
       <ngb-pagination
@@ -15,10 +16,12 @@
         <div class="input-group filter-search">
     <span class="input-group-text" id="input-search">
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
       </svg>
     </span>
-          <input type="text" class="form-control input-search" placeholder="Search..." tabindex="-1" aria-label="Search..." aria-describedby="input-search">
+          <input type="text" class="form-control input-search" placeholder="Buscar..." (input)="search($event)"
+                 tabindex="-1" aria-label="Search..." aria-describedby="input-search">
         </div>
       </div>
     </div>
@@ -47,7 +50,7 @@
                 <h2>Eliminar</h2>
               </button>
 
-              <button class="m-4" routerLink="update/{{juguete._id}}">
+              <button class="m-4" routerLink="/add-juguete/{{juguete._id}}">
                 <h2>Editar</h2>
               </button>
             </div>
@@ -57,6 +60,28 @@
         </div>
   </div>
   <br>
+  } @else {
+    <div class="p-4 text-center">
+      <div class="row">
+          <div class="col-12 d-flex justify-content-center">
+            <div class="card m-3 border rounded-top-5 bg-primary">
+              <div class="text-capitalize card-header" routerLink="{{juguete._id}}">
+                <h1>Nombre: {{juguete.nombre}}</h1>
+              </div>
+              <div routerLink="{{juguete._id}}">
+                <img class="card-img-top"  src="{{juguete.imagen}}" alt="{{juguete.nombre}}"
+                     height="250px">
+              </div>
+              <div class="card-footer">
+                <h3>Precio: {{juguete.precio | currency: 'EUR'}}</h3>
+                <h4>Edad mínima: {{juguete.edadMinima}}</h4>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <br>
+  }
 } @placeholder (minimum 1s){
   <div class="row text-center">
     <h2 class="text-primary">Cargando juguetes...</h2>

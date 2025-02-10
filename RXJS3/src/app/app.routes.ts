@@ -23,7 +23,7 @@ export const routes: Routes = [
     component: AddJuguetesComponent
   },
   {
-    path: 'edit-juguete/:id',
+    path: 'add-juguete/:id',
     component: AddJuguetesComponent
   },
   {

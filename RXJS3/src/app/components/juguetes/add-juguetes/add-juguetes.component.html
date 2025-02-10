@@ -1,1 +1,116 @@
-<p>add-juguetes works!</p>
+@if(!id){
+<form [formGroup]="formJuguete" (ngSubmit)="onSubmit()">
+  <div class="m-4 text-center d-flex justify-content-center text-capitalize">
+    <div class="form-floating mb-3 card">
+      <div class="card-header">
+        <label for="nombre">Nombre juguete:</label>
+        <input formControlName="nombre"
+               type="text" class="form-control"
+               id="nombre"
+               placeholder="Nombre">
+      </div>
+      <div class="card-header">
+        <label for="imagen">URL Imagen:</label>
+        <input formControlName="imagen"
+               type="text" class="form-control"
+               id="imagen"
+               placeholder="URL Imagen">
+      </div>
+      <div class="card-body">
+        <label for="categoria">Categoria:</label>
+        <input formControlName="categoria"
+               type="text" class="form-control"
+               id="categoria"
+               placeholder="Categoria">
+      </div>
+      <div>
+        <label for="edadMinima">Edad Minima:</label>
+        <input formControlName="edadMinima"
+               type="number" class="form-control"
+               id="edadMinima"
+               placeholder="Edad Minima">
+      </div>
+      <div>
+        <label for="precio">Precio:</label>
+        <input formControlName="precio"
+               type="number" class="form-control"
+               id="precio"
+               placeholder="Precio">
+      </div>
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</form>
+} @else {
+  <div>
+    <div class="m-4 text-center d-flex justify-content-center text-capitalize">
+
+      <form [formGroup]="formJuguete" (ngSubmit)="onSubmitUpdate()">
+        <div class="m-4 text-center d-flex justify-content-center text-capitalize">
+          <div class="form-floating mb-3 card">
+            <div class="card-header">
+              <label for="nombre">Nombre: {{juguete.nombre}}</label>
+              <input formControlName="nombre"
+                     type="text" required class="form-control"
+                     id="nombre"
+                     placeholder="{{juguete.nombre}}">
+            </div>
+            <div class="card-header">
+              <label for="imagen">URL Imagen</label>
+              <input formControlName="imagen"
+                     type="text" required class="form-control"
+                     id="imagen"
+                     placeholder="URL Imagen">
+            </div>
+            <div class="card-body">
+              <label for="categoria">Categoria:</label>
+              <input formControlName="categoria"
+                     type="text" class="form-control"
+                     id="categoria"
+                     placeholder="Categoria">
+            </div>
+            <div>
+              <label for="edadMinima">Edad Minima:</label>
+              <input formControlName="edadMinima"
+                     type="number" class="form-control"
+                     id="edadMinima"
+                     placeholder="Edad Minima">
+            </div>
+            <div>
+              <label for="precio">Precio:</label>
+              <input formControlName="precio"
+                     type="number" class="form-control"
+                     id="precio"
+                     placeholder="Precio">
+            </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary"
+                [disabled]="formJuguete.invalid">Guardar cambios</button>
+              </div>
+          </div>
+        </div>
+      </form>
+      <div class="card col-6 bg-primary">
+        <div class="card-header">
+          <h1>{{juguete.nombre}}</h1>
+        </div>
+        <div class="card-img img-thumbnail">
+          <img class="" src="{{juguete.imagen}}" alt="{{juguete.nombre}}">
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-3">
+              <h4>Precio: {{juguete.precio}}</h4>
+            </div>
+            <div class="col-6"></div>
+            <div class="col-3">
+              <h4>Categoría: {{juguete.categoria}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
