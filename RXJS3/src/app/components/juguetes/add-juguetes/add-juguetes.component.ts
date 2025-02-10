@@ -85,13 +85,23 @@ export class AddJuguetesComponent implements OnInit{
 
   }
 
+
   onSubmitUpdate() {
-    return this.jugueteService.putJuguete(this.id, this.formJuguete.getRawValue()).subscribe(
+    console.log(this.id);
+    this.jugueteService.putJuguete(this.id, this.formJuguete.getRawValue()).subscribe(
       {
+        next: value => {
+          console.log(value);
+        },
+        error: err => {
+          console.log(err);
+        },
         complete: () => {
-          console.log('Completado')
+          console.log(this.juguete);
+          this.router.navigate(['/inicio']);
         }
       }
     )
-  }
+}
+
 }
