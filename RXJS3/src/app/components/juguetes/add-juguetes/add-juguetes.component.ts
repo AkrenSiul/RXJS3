@@ -31,6 +31,7 @@ export class AddJuguetesComponent implements OnInit{
   )
 
   ngOnInit() {
+    console.log(this.id);
     if(this.id){
       this.edit = true;
       this.getJuguete(this.id)

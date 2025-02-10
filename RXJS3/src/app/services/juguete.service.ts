@@ -26,7 +26,7 @@ export class JugueteService {
     return this.http.put(this.urlBase+'update/'+id, juguete);
   }
   deleteJuguete(id: string): Observable<any>{
-    return this.http.delete<any>(this.urlBase+id);
+    return this.http.delete<any>(this.urlBase+'delete/'+id);
   }
 
 }
