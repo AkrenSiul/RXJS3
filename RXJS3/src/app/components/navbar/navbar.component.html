@@ -5,6 +5,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Inicio</a>
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkJuguete"
              role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,7 +26,16 @@
             <li><a class="dropdown-item" routerLink="add-cosmetico">Añadir cosmético</a></li>
           </ul>
         </li>
+        <li class="nav-item">
+          <a class="nav-link position-relative" aria-current="page" routerLink="carrito">Carrito
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+            {{cantidadCarrito}}
+          </span>
+          </a>
+
+        </li>
       </ul>
     </div>
+
   </div>
 </nav>

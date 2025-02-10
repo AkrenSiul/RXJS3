@@ -46,11 +46,14 @@
               <h4>Edad mínima: {{juguete.edadMinima}}</h4>
             </div>
             <div class="d-flex justify-content-between">
-              <div class="btn btn-danger m-3"(click)="onDelete(juguete)">
-                <h2>Eliminar</h2>
+              <div class="btn btn-danger m-2" (click)="onDelete(juguete)">
+                <p>Eliminar</p>
               </div>
-              <div class="btn btn-info m-3" routerLink="/add-juguete/{{juguete._id}}">
-                <h2>Editar</h2>
+              <div class="btn btn-info m-2" routerLink="/add-juguete/{{juguete._id}}">
+                <p>Editar</p>
+              </div>
+              <div class="btn btn-light m-2" (click)="addToCart(juguete)">
+                <p>Añadir</p>
               </div>
             </div>
 

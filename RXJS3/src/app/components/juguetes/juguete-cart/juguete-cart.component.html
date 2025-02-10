@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h2 class="text-center text-primary">PEDIDOS</h2>
+    @for(juguete of jugueteList; track $index){
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-lg-between">
+            <h4> {{juguete.nombre}}</h4>
+            <p class="card-text">{{juguete.precio | currency: 'EUR'}}</p>
+          </div>
+        </div>
+
+
+      </div>
+    }
+    @for(cosmetico of cosmeticoList; track cosmetico._id){
+      <div class="card">
+        <div class="card-body">
+        <div class="d-flex justify-content-lg-between">
+          <h4> {{cosmetico.name}}</h4>
+          <p class="card-text">{{cosmetico.price | currency: 'EUR'}}</p>
+        </div>
+      </div>
+      </div>
+    }
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="card-title text-primary">
+            <h3>TOTAL:</h3>
+          </div>
+          <p class="text-end">{{totalPrice}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -16,8 +16,8 @@
   @for(cosmetico of cosmeticos; track cosmetico._id){
     <div class="col-3 p-4">
       <h1 class="text-danger" (click)="onDelete(cosmetico._id)">ELIMINAR</h1>
-      <div class="card" routerLink="{{cosmetico._id}}">
-        <img class="card-img-top" src="{{cosmetico.image}}" alt="{{cosmetico.name}}">
+      <div class="card">
+        <img class="card-img-top" src="{{cosmetico.image}}" alt="{{cosmetico.name}}" routerLink="{{cosmetico._id}}">
         <div class="card-header">
           <h1>{{cosmetico.name}}</h1>
         </div>
@@ -26,7 +26,12 @@
           {{cosmetico.brand}}
         </div>
         <div class="card-footer">
-          <h3>{{cosmetico.price | currency: 'EUR'}}</h3>
+          <div class="d-flex justify-content-between m-2">
+            <div class="btn btn-outline-info" (click)="addToCart(cosmetico)">
+              Añadir
+            </div>
+            <h3>{{cosmetico.price | currency: 'EUR'}}</h3>
+          </div>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import {RouterLink} from '@angular/router';
 import {NgbPagination} from '@ng-bootstrap/ng-bootstrap';
 import {SearchService} from '../../../services/search.service';
 import {CurrencyPipe} from '@angular/common';
+import {CartService} from '../../../services/cart.service';
 
 @Component({
   selector: 'app-juguete-list',
@@ -20,6 +21,7 @@ export class JugueteListComponent implements OnInit {
   @Input('id')id!: string;
   private readonly jugueteService: JugueteService = inject(JugueteService);
   private readonly searchService: SearchService = inject(SearchService);
+  private readonly cartService: CartService = inject(CartService);
   detail = false;
   currentPage = 1;
   apiData!: JugueteInterface;
@@ -126,5 +128,9 @@ export class JugueteListComponent implements OnInit {
 
   search(event: any) {
     this.searchService.search(event.target.value);
+  }
+
+  addToCart(juguete: Juguete) {
+    this.cartService.addToCartJuguete(juguete);
   }
 }

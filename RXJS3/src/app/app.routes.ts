@@ -3,6 +3,7 @@ import {JugueteListComponent} from './components/juguetes/juguete-list/juguete-l
 import {AddJuguetesComponent} from './components/juguetes/add-juguetes/add-juguetes.component';
 import {CosmeticoListComponent} from './components/cosmeticos/cosmetico-list/cosmetico-list.component';
 import {AddCosmeticosComponent} from './components/cosmeticos/add-cosmeticos/add-cosmeticos.component';
+import {JugueteCartComponent} from './components/juguetes/juguete-cart/juguete-cart.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,10 @@ export const routes: Routes = [
   {
     path: 'edit-cosmetico/:id',
     component: AddCosmeticosComponent
+  },
+  {
+    path: 'carrito',
+    component: JugueteCartComponent
   },
   {
     path: '**',

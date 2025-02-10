@@ -4,6 +4,7 @@ import {CurrencyPipe} from '@angular/common';
 import {CosmeticoService} from '../../../services/cosmetico.service';
 import {Cosmetico} from '../../../common/cosmeticos-interface';
 import {SearchService} from '../../../services/search.service';
+import {CartService} from '../../../services/cart.service';
 
 @Component({
   selector: 'app-cosmetico-list',
@@ -18,6 +19,7 @@ export class CosmeticoListComponent {
   @Input('id')id!: string;
   private readonly cosmeticoService: CosmeticoService = inject(CosmeticoService);
   private readonly searchService: SearchService = inject(SearchService);
+  private readonly cartService: CartService = inject(CartService);
   cosmeticos: Cosmetico[] = [];
   currentPage = 1;
   sizePage = 20;
@@ -81,5 +83,9 @@ export class CosmeticoListComponent {
         }
       }
     )
+  }
+
+  addToCart(cosmetico: Cosmetico) {
+    this.cartService.addToCartCosmetico(cosmetico);
   }
 }
