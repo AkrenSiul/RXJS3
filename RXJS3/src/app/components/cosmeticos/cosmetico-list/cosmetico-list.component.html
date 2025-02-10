@@ -12,6 +12,7 @@
       </div>
     </div>
 </div>
+
 <div class="row text-center text-capitalize">
   @for(cosmetico of cosmeticos; track cosmetico._id){
     <div class="col-3 p-4">
@@ -29,6 +30,9 @@
           <div class="d-flex justify-content-between m-2">
             <div class="btn btn-outline-info" (click)="addToCart(cosmetico)">
               Añadir
+            </div>
+            <div class="btn btn-outline-dark text-info" routerLink="/cosmeticos-detail/{{cosmetico._id}}">
+              Detalle
             </div>
             <h3>{{cosmetico.price | currency: 'EUR'}}</h3>
           </div>

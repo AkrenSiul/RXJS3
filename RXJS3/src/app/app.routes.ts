@@ -4,6 +4,7 @@ import {AddJuguetesComponent} from './components/juguetes/add-juguetes/add-jugue
 import {CosmeticoListComponent} from './components/cosmeticos/cosmetico-list/cosmetico-list.component';
 import {AddCosmeticosComponent} from './components/cosmeticos/add-cosmeticos/add-cosmeticos.component';
 import {JugueteCartComponent} from './components/juguetes/juguete-cart/juguete-cart.component';
+import {DetailCosmeticoComponent} from './components/cosmeticos/detail-cosmetico/detail-cosmetico.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,10 @@ export const routes: Routes = [
     component: CosmeticoListComponent
   },
   {
+    path: 'cosmeticos-detail/:id',
+    component: DetailCosmeticoComponent
+  },
+  {
     path: 'add-cosmetico',
     component: AddCosmeticosComponent
   },
@@ -43,9 +48,4 @@ export const routes: Routes = [
     path: 'carrito',
     component: JugueteCartComponent
   },
-  {
-    path: '**',
-    redirectTo: 'juguetes-list',
-    pathMatch: "full"
-  }
 ];

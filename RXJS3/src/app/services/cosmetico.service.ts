@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {map, Observable} from 'rxjs';
 import {Cosmetico, Cosmeticos, CosmeticosInterface} from '../common/cosmeticos-interface';
 
 @Injectable({
@@ -16,8 +16,8 @@ export class CosmeticoService {
     const url = 'https://api-cosmeticos.vercel.app/api/v2/cosmeticos/paged?page='
     return this.http.get<CosmeticosInterface>(url+page+'&limit='+size);
   }
-  getCosmetico(id: string): Observable<CosmeticosInterface>{
-    return this.http.get<CosmeticosInterface>(this.urlBase+'detail/'+id);
+  getCosmetico(id: string): Observable<Cosmetico>{
+    return this.http.get<Cosmetico>(this.urlBase+'detail/'+id);
   }
   addCosmetico(cosmetico: Cosmetico): Observable<CosmeticosInterface>{
     return this.http.post<CosmeticosInterface>(this.urlBase+'addOne/',cosmetico);
