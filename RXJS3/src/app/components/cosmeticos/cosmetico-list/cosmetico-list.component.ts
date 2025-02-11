@@ -66,7 +66,11 @@ export class CosmeticoListComponent {
   }
 
     search(event: any) {
-    this.searchService.search(event.target.value);
+    if(event.target.value === ''){
+      this.getCosmeticos();
+    }else {
+      this.searchService.search(event.target.value);
+    }
     }
 
   private searchCosmeticos() {

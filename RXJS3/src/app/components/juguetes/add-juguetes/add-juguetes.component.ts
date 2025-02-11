@@ -37,7 +37,6 @@ export class AddJuguetesComponent implements OnInit{
       this.getJuguete(this.id)
     }else{
       this.edit = false;
-
     }
   }
 
@@ -94,7 +93,7 @@ export class AddJuguetesComponent implements OnInit{
 
   onSubmitUpdate() {
     console.log(this.id);
-    this.jugueteService.putJuguete(this.id, this.formJuguete.getRawValue()).subscribe(
+    this.jugueteService.putJuguete(this.formJuguete.getRawValue()).subscribe(
       {
         next: value => {
           console.log(value);

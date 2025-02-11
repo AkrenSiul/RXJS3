@@ -127,7 +127,11 @@ export class JugueteListComponent implements OnInit {
   }
 
   search(event: any) {
-    this.searchService.search(event.target.value);
+    if(event.target.value === ''){
+      this.getJuguetes(this.currentPage);
+    }else {
+      this.searchService.search(event.target.value);
+    }
   }
 
   addToCart(juguete: Juguete) {

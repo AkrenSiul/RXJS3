@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, Subject, switchMap} from 'rxjs';
+import {catchError, Observable, of, Subject, switchMap} from 'rxjs';
 import {Juguete} from '../common/juguete-interface';
 import {Cosmetico} from '../common/cosmeticos-interface';
 
@@ -16,15 +16,17 @@ export class SearchService {
     switchMap(word => {
       return this.http.get<Juguete[]>(
         this.urlSearch+word
-      )
+      ).pipe(catchError(() => of([])))
     })
+
   )
   private cosmeticSearch$: Observable<Cosmetico[]> = this.palabra.pipe(
     switchMap(word => {
       return this.http.get<Cosmetico[]>(
         this.urlSearchCosm+word
-      );
+      ).pipe(catchError(() => of([])))
     })
+
   )
 
   search(name: string){
