@@ -22,8 +22,8 @@ export class CosmeticoService {
   addCosmetico(cosmetico: Cosmetico): Observable<CosmeticosInterface>{
     return this.http.post<CosmeticosInterface>(this.urlBase+'addOne/',cosmetico);
   }
-  putCosmetico(id: string, cosmetico: Cosmetico): Observable<any>{
-    return this.http.put<any>(this.urlBase+'updateOne/'+id, cosmetico);
+  putCosmetico(cosmetico: Cosmetico): Observable<Cosmetico>{
+    return this.http.put<Cosmetico>(this.urlBase+'updateOne/'+cosmetico._id, cosmetico);
   }
   deleteCosmetico(id: string): Observable<any>{
     return this.http.delete<any>(this.urlBase+'deleteOne/'+id);

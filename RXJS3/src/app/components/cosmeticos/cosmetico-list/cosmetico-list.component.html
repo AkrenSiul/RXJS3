@@ -16,25 +16,28 @@
 <div class="row text-center text-capitalize">
   @for(cosmetico of cosmeticos; track cosmetico._id){
     <div class="col-3 p-4">
-      <h1 class="text-danger" (click)="onDelete(cosmetico._id)">ELIMINAR</h1>
-      <div class="card">
-        <img class="card-img-top" src="{{cosmetico.image}}" alt="{{cosmetico.name}}" routerLink="{{cosmetico._id}}">
+      <div class="card bg-opacity-25 bg-dark">
+        <img class="card-img-top bg-white" src="{{cosmetico.image}}" alt="{{cosmetico.name}}" height="300px"
+             routerLink="{{cosmetico._id}}">
         <div class="card-header">
           <h1>{{cosmetico.name}}</h1>
         </div>
         <div class="card-body">
-          {{cosmetico.type}}
-          {{cosmetico.brand}}
+          <div class="d-flex justify-content-between">
+            <h5 class="btn btn-danger" (click)="onDelete(cosmetico._id)">ELIMINAR</h5>
+            <p class="badge bg-secondary">{{cosmetico.type}}</p>
+            <p class="badge bg-success">{{cosmetico.brand}}</p>
+          </div>
         </div>
         <div class="card-footer">
           <div class="d-flex justify-content-between m-2">
-            <div class="btn btn-outline-info" (click)="addToCart(cosmetico)">
+            <div class="btn btn-outline-info text-primary" (click)="addToCart(cosmetico)">
               Añadir
             </div>
-            <div class="btn btn-outline-dark text-info" routerLink="/cosmeticos-detail/{{cosmetico._id}}">
+            <div class="btn btn-outline-dark text-primary " routerLink="/cosmeticos-detail/{{cosmetico._id}}">
               Detalle
             </div>
-            <h3>{{cosmetico.price | currency: 'EUR'}}</h3>
+            <h5>{{cosmetico.price | currency: 'EUR'}}</h5>
           </div>
         </div>
       </div>

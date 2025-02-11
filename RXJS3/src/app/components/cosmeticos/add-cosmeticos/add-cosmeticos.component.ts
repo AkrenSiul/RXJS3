@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {CosmeticoService} from '../../../services/cosmetico.service';
 
@@ -11,6 +11,7 @@ import {CosmeticoService} from '../../../services/cosmetico.service';
   styleUrl: './add-cosmeticos.component.css'
 })
 export class AddCosmeticosComponent {
+  @Input('id')id!: string;
   private readonly cosmeticoService: CosmeticoService = inject(CosmeticoService);
   private readonly formBuilder: FormBuilder = inject(FormBuilder);
 
@@ -42,19 +43,33 @@ export class AddCosmeticosComponent {
 
 
   onSubmit() {
-    this.cosmeticoService.addCosmetico(this.formCosmetico.getRawValue()).subscribe(
-      {
-        next: value => {
-          console.log(value);
-        },
-        error: error => {
-          console.log(error);
-        },
-        complete: () =>{
-          console.log('Cosmetico añadido')
+    if(this.id){
+      this.cosmeticoService.putCosmetico(this.formCosmetico.getRawValue()).subscribe(
+        {
+          complete: () => {
+            console.log('Juguete updateado')
+          },
+          error: err => {
+            console.log(err.message);
+          }
         }
-      },
-    )
+      )
+
+    }else {
+      this.cosmeticoService.addCosmetico(this.formCosmetico.getRawValue()).subscribe(
+        {
+          next: value => {
+            console.log(value);
+          },
+          error: error => {
+            console.log(error);
+          },
+          complete: () => {
+            console.log('Cosmetico añadido')
+          }
+        },
+      )
+    }
   }
 
 }
