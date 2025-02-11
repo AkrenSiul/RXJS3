@@ -40,7 +40,8 @@
                  placeholder="Precio:">
         </div>
         <div class="m-3">
-          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          <button type="submit" class="btn btn-primary"
+          [disabled]="formCosmetico.invalid" >Guardar cambios</button>
         </div>
       </div>
     </form>
