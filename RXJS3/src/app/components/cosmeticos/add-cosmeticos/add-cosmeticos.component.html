@@ -1,5 +1,6 @@
+@defer(when cargado){
 <div>
-  <div class="m-4 text-center d-flex justify-content-center text-capitalize">
+  <div class="m-4 text-center d-flex justify-content-around text-capitalize">
 
     <form [formGroup]="formCosmetico" (ngSubmit)="onSubmit()">
       <div class="form-floating mb-3">
@@ -43,5 +44,22 @@
         </div>
       </div>
     </form>
+    <div class="card bg-opacity-25 bg-dark bg-hover">
+      <img class="card-img-top bg-white" src="{{image.value? image.value : 'image'}}"
+           alt="{{name.value? name.value : 'name'}}" height="300px">
+      <div class="card-header">
+        <h3>{{name.value? name.value : 'name'}}</h3>
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <p class="badge bg-secondary">{{type.value? type.value : 'type'}}</p>
+          <p class="badge bg-success">{{brand.value? brand.value : 'brand'}}</p>
+        </div>
+      </div>
+      <div class="card-footer">
+          <h5>{{price.value? price.value : 0 | currency: 'EUR'}}</h5>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+}

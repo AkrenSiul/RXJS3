@@ -1,0 +1,4 @@
+.bg-hover:hover {
+  cursor: pointer;
+  border-color: black;
+}
