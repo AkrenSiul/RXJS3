@@ -5,12 +5,17 @@ import {CosmeticoService} from '../../../services/cosmetico.service';
 import {Cosmetico} from '../../../common/cosmeticos-interface';
 import {SearchService} from '../../../services/search.service';
 import {CartService} from '../../../services/cart.service';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {faAdd} from '@fortawesome/free-solid-svg-icons/faAdd';
+import {NgbToast} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cosmetico-list',
   imports: [
     RouterLink,
-    CurrencyPipe
+    CurrencyPipe,
+    FaIconComponent,
+    NgbToast
   ],
   templateUrl: './cosmetico-list.component.html',
   styleUrl: './cosmetico-list.component.css'
@@ -23,6 +28,12 @@ export class CosmeticoListComponent {
   cosmeticos: Cosmetico[] = [];
   currentPage = 1;
   sizePage = 20;
+  toastShow = false;
+  toast = {
+    message: '',
+    color: '',
+  }
+
 
   constructor(){
     this.getCosmeticos();
@@ -34,6 +45,9 @@ export class CosmeticoListComponent {
       {
         next: value => {
           this.cosmeticos = value.cosmeticos.cosmeticos;
+          setTimeout(() => {
+            this.showToast('Cosmetico añadido', 'bg-success')
+          },1500)
         },
         error: error => {
           console.log(error);
@@ -91,5 +105,14 @@ export class CosmeticoListComponent {
 
   addToCart(cosmetico: Cosmetico) {
     this.cartService.addToCartCosmetico(cosmetico);
+
+  }
+
+  protected readonly faAdd = faAdd;
+
+  private showToast(message: string, color: string){
+    this.toast.message = message;
+      this.toast.color = color;
+
   }
 }

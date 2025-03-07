@@ -1,0 +1,16 @@
+
+<div class="chat-container">
+  <div class="messages">
+    <div *ngFor="let message of messages">
+      <div [ngClass]="{ 'user-message': message.role === 'user', 'assistant-message': message.role === 'assistant' }">
+        <strong>{{ message.role === 'user' ? 'Tú' : 'ChatGPT' }}:</strong>
+        {{ message.content }}
+      </div>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <input [(ngModel)]="userInput" placeholder="Escribe tu mensaje" (keyup.enter)="sendMessage()" />
+    <button (click)="sendMessage()">Enviar</button>
+  </div>
+</div>

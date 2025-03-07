@@ -5,6 +5,7 @@ import {CosmeticoListComponent} from './components/cosmeticos/cosmetico-list/cos
 import {AddCosmeticosComponent} from './components/cosmeticos/add-cosmeticos/add-cosmeticos.component';
 import {JugueteCartComponent} from './components/juguetes/juguete-cart/juguete-cart.component';
 import {DetailCosmeticoComponent} from './components/cosmeticos/detail-cosmetico/detail-cosmetico.component';
+import {ChatComponent} from './components/chat/chat.component';
 
 export const routes: Routes = [
   {
@@ -47,5 +48,9 @@ export const routes: Routes = [
   {
     path: 'carrito',
     component: JugueteCartComponent
+  },
+  {
+    path: 'chat',
+    component: ChatComponent
   },
 ];

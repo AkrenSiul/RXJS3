@@ -1,0 +1,10 @@
+{
+  "/openai": {
+    "target": "https://api.openai.com/v1/",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/openai": ""
+    }
+  }
+}
